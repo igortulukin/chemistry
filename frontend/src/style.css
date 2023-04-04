@@ -1,4 +1,13 @@
 :root {
+  width: 100vw;
+  --main-color: #98F576;
+  --main-color-hover: #83E55F;
+  --main-color-active: #0D600D;
+  --main-with-wight: #0E8A0E;
+  --dark-gray: #BEBEBE;
+  --light-gray: #D4D4D4;
+  --link-read: #06899B;
+  overflow-x: hidden;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -20,15 +29,16 @@
 }
 
 h1{
+  margin: 14px 0;
   font-family: 'PT Serif';
   font-style: normal;
   font-weight: 400;
   font-size: 34px;
   line-height: 45px;
-  margin: 24px 0;
 }
 
 h3{
+  margin: 0;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;

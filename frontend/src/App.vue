@@ -14,7 +14,7 @@ const resultCount = ref('');
   <h1>Химическая база знаний</h1>
   <SearchBar v-model:show-builder="showBuilder" v-model:result-count="resultCount"/>
   <FormuleBuilder v-model:show-builder="showBuilder"/>
-  <router-view v-model:result-count="resultCount"></router-view>
+  <router-view v-model:result-count="resultCount" v-model:show-builder="showBuilder"></router-view>
 
 </template>
 

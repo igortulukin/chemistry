@@ -1,12 +1,12 @@
 <template>
 <div class="search-result">
-  <ResultCard v-if="query" v-for="card in data" :card="card"/>
+  <ResultCard v-if="query" v-for="card in searchResult" :card="card"/>
   <div v-else class="nothing-found">
-    <h3>По вашему запросу ничего не найдено</h3>
+    <h3>По вашему запросу {{props.query}} ничего не найдено</h3>
     <ul>
     Попробуйте снова, учитывая эти правила:
       <li>проверьте ещё раз данные, которые вы ввели</li>
-      <li>при заполненни формы используйте формат SMILES</li>
+      <li>при заполненни формы используйте формат <a>SMILES</a> </li>
       <li>используйте больше ключевых слов (Пластик, Вода)</li>
     </ul>
     Рекомендуем подробнее ознакомиться с алгоритмом поиска, чтобы точнее задававать наиболее точный запрос
@@ -19,26 +19,27 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
 import searchResult from "./searchResult.json"
 import ResultCard from "./ResultCard.vue";
 import {ref, watch} from "vue";
-const route = useRoute();
+
+const emit = defineEmits(['update:result-count', 'update:show-builder'])
 const props = defineProps({
   query: String,
-  resultCount: String
+  resultCount: String,
+  showBuilder: Boolean,
 })
-const emit = defineEmits(['update:result-count'])
-const data = ref(searchResult);
-emit('update:result-count', data ? data.length : 0);
-watch(() => route.params, () => {
-  if (route.params.query){
-    data.value = null;
-    console.log('emit')
+
+emit('update:result-count', searchResult.length)
+emit('update:show-builder', false)
+
+watch(props, async ()=> {
+  if (!props.query){
     emit('update:result-count', null)
   }
-/*  data.value = searchResult;
-  emit('update:result-count', data ? data.length : 0)*/
+  else {
+    emit('update:result-count', searchResult.length)
+  }
 })
 </script>
 
@@ -47,6 +48,12 @@ watch(() => route.params, () => {
   display: flex;
   gap: 25px;
   flex-flow: column;
+}
+
+a{
+  color: var(--main-with-wight);
+  text-decoration: underline;
+  text-underline-offset: 1px;
 }
 
 h3{
@@ -84,10 +91,13 @@ li::before {
 .read-more{
   width: 350px;
   height: 43px;
-  background: #98F576;
+  background: var(--main-color);
   border-radius: 10px;
   border: none;
+}
 
+.read-more:active, .read-more:hover{
+  background-color: var(--main-color-hover);
 }
 
 .report{

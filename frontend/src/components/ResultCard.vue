@@ -1,12 +1,12 @@
 <template>
   <div class="card">
     <div class="info">
-      <h3>{{card.title}}</h3>
+      <h3><a href="/#">{{card.title}}</a></h3>
       <p>{{card.description}}</p>
       <div class="additional">
         <span v-for="info in card.additional">{{info}}</span>
       </div>
-      <span class="wrong-result" @click="reportShow = true">Результат поиска неправильный</span>
+      <p class="wrong-result" @click="reportShow = true">Результат поиска неправильный</p>
     </div>
     <div class="pic">
       <img :src="card.image">
@@ -17,15 +17,15 @@
         <h4>Почему результат поиска неправильный?</h4>
         <span>Благодаря вашему отзыву, мы сможем сделать поисковик лучше</span>
         <form>
-          <input type="radio" id="formula" name="incorrect_search" value="Wrong_formula" checked>
+          <input type="radio" id="formula" name="incorrect_search" value="Wrong_formula" v-model="reportValue">
           <label for="formula">Неверная формула</label>
-          <input type="radio" id="algorithm" name="incorrect_search" value="Error_in_algorithm">
+          <input type="radio" id="algorithm" name="incorrect_search" value="Error_in_algorithm" v-model="reportValue">
           <label for="algorithm">Ошибка в алгоритме поиска</label>
-          <input type="radio" id="display" name="incorrect_search" value="Wrong_display">
+          <input type="radio" id="display" name="incorrect_search" value="Wrong_display" v-model="reportValue">
           <label for="display">Неправильное отображение формулы</label>
-          <input type="radio" id="own" name="incorrect_search" value="Own_option">
+          <input type="radio" id="own" name="incorrect_search" value="Own_option" v-model="reportValue">
           <label for="own">Свой вариант</label>
-          <button class="send">Отправить</button>
+          <button class="send" :disabled="!reportValue">Отправить</button>
         </form>
       </div>
     </div>
@@ -35,12 +35,22 @@
 
 <script setup>
 import {ref} from "vue";
-
 const props = defineProps({card: Object})
 const reportShow = ref(false)
+const reportValue = ref('')
 </script>
 
 <style scoped>
+
+a:visited{
+  color: #06899B;
+}
+
+a:hover{
+  text-decoration: underline;
+  text-decoration-color: inherit;
+  text-underline-offset: 5px;
+}
 
 .report{
   position: fixed;
@@ -90,8 +100,13 @@ label{
   border: none;
   width: 129px;
   height: 43px;
-  background: #98F576;
   border-radius: 10px;
+  background: var(--main-color);
+}
+
+.send:disabled{
+  cursor: inherit;
+  background-color: var(--light-gray);
 }
 
 input[type="radio"] {
@@ -100,10 +115,10 @@ input[type="radio"] {
   background-color: #ffffff;
   margin: 0;
   font: inherit;
-  color: #0E8A0E;
+  color: var(--main-with-wight);
   width: 1.15em;
   height: 1.15em;
-  border: 1px solid #0E8A0E;
+  border: 1px solid var(--main-with-wight);
   border-radius: 100%;
   display: grid;
   place-content: center;
@@ -116,18 +131,18 @@ input[type="radio"]::before {
   height: 0.5em;
   border-radius: 100%;
   transform: scale(0);
-  color: #0E8A0E;
+  color: var(--main-with-wight);
   transition: 120ms transform ease-in-out;
 }
 
 input[type="radio"]:checked::before {
-  box-shadow: inset 1em 1em #0E8A0E;
+  box-shadow: inset 1em 1em var(--main-with-wight);
   transform: scale(1);
 }
 
 h3{
   margin: 0;
-  color: #0E8A0E;
+  color: var(--main-with-wight);
 }
 
 h4{

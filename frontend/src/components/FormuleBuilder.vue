@@ -97,6 +97,7 @@ h4{
   display: flex;
   gap: 5px;
   align-items: center;
+  margin-bottom: 14px;
 }
 
 .hints{
@@ -115,13 +116,13 @@ h4{
   gap: 12px;
   width: 40%;
   height: 120px;
-  border: 1px solid #BEBEBE;
+  border: 1px solid var(--dark-gray);
   border-radius: 12px;
 }
 
 .forward{
   align-self: flex-end;
-  color: #0E8A0E;
+  color: var(--main-with-wight);
   font-weight: 500;
 }
 
@@ -131,14 +132,14 @@ h4{
   right: 5px;
   background-color: #FFFFFF;
   border: none;
-  color: #BEBEBE;
+  color: var(--dark-gray);
   cursor: pointer;
 }
 
 .left-bar{
   background: #FFFFFF;
   grid-row: 2;
-  border: 1px solid #DBDBDB;
+  border: 1px solid var(--light-gray);
   border-top: none;
   border-radius: 0px 0px 0px 10px;
 }
@@ -173,5 +174,9 @@ h4{
 
 .main{
   background-color: lightgray;
+}
+
+a:hover{
+  text-decoration: underline;
 }
 </style>
