@@ -3,7 +3,7 @@ import {ref, computed} from "vue";
 import SearchBar from "./components/SearchBar.vue";
 import FormuleBuilder from "./components/FormuleBuilder.vue";
 const showBuilder = ref(true);
-const resultCount = ref('');
+const resultCount = ref(null);
 </script>
 
 <template>

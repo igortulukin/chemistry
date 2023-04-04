@@ -1,13 +1,13 @@
 <template>
   <div class="searchbar">
     <div class="wrapper">
-    <input type="text" v-model="query" placeholder="CCC(=O)O">
+    <input type="text" v-model="query" placeholder="CCC(=O)O" @keyup.enter="makeSearch">
     <svg class="filters" width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M21 1H1L9 10.46V17L13 19V10.46L21 1Z" stroke="#BEBEBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     </div>
     <button @click="makeSearch">Найти</button>
-    <span v-if="resultCount" class="count">Найдено {{resultCount}} результатов</span>
+    <span v-if="resultCount != null" class="count">{{ resultCount === 0 ? 'По вашему запросу ничего не найдено' : `Найдено ${resultCount} результатов` }}</span>
   </div>
 
 </template>
@@ -16,6 +16,7 @@
 import {ref} from "vue";
 import router from "../router/index.js";
 defineProps(['showBuilder', 'resultCount'])
+
 const emit = defineEmits(['update:show-builder'])
 const query = ref('')
 function makeSearch(){

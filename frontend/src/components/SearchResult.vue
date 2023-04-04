@@ -35,7 +35,7 @@ emit('update:show-builder', false)
 
 watch(props, async ()=> {
   if (!props.query){
-    emit('update:result-count', null)
+    emit('update:result-count', 0)
   }
   else {
     emit('update:result-count', searchResult.length)
